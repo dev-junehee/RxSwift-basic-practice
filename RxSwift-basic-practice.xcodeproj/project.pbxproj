@@ -18,6 +18,7 @@
 		C41A24082C587AFC00ED0B5A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C41A24072C587AFC00ED0B5A /* SnapKit */; };
 		C41A240A2C58ACB400ED0B5A /* BasicButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A24092C58ACB400ED0B5A /* BasicButtonViewController.swift */; };
 		C41A240C2C58C08500ED0B5A /* OperatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A240B2C58C08500ED0B5A /* OperatorViewController.swift */; };
+		C48061242C59DF16003FF7EE /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48061232C59DF16003FF7EE /* UserViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		C41A23FA2C58759900ED0B5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C41A24092C58ACB400ED0B5A /* BasicButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicButtonViewController.swift; sourceTree = "<group>"; };
 		C41A240B2C58C08500ED0B5A /* OperatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorViewController.swift; sourceTree = "<group>"; };
+		C48061232C59DF16003FF7EE /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				C41A23F72C58759900ED0B5A /* LaunchScreen.storyboard */,
 				C41A23FA2C58759900ED0B5A /* Info.plist */,
 				C41A240B2C58C08500ED0B5A /* OperatorViewController.swift */,
+				C48061232C59DF16003FF7EE /* UserViewController.swift */,
 			);
 			path = "RxSwift-basic-practice";
 			sourceTree = "<group>";
@@ -160,6 +163,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C41A240C2C58C08500ED0B5A /* OperatorViewController.swift in Sources */,
+				C48061242C59DF16003FF7EE /* UserViewController.swift in Sources */,
 				C41A23F12C58759800ED0B5A /* ViewController.swift in Sources */,
 				C41A23ED2C58759800ED0B5A /* AppDelegate.swift in Sources */,
 				C41A23EF2C58759800ED0B5A /* SceneDelegate.swift in Sources */,

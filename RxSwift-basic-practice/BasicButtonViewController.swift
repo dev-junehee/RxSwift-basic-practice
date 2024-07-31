@@ -27,6 +27,11 @@ final class BasicButtonViewController: UIViewController {
         secondExample()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        present(OperatorViewController(), animated: true)
+    }
+    
     private func configureView() {
         view.backgroundColor = .white
         view.addSubview(button)
