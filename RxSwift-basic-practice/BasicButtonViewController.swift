@@ -71,103 +71,107 @@ final class BasicButtonViewController: UIViewController {
     
     
     private func firstExample() {
-        // // Infinite Observable
-        // // 1.
-        // button.rx.tap
-        //     .subscribe { _ in
-        //         // 버튼을 클릭했을 때
-        //         self.label.text = "버튼을 클릭했어요"
-        //         print("next")
-        //     } onError: { error in
-        //         print("error")
-        //     } onCompleted: {
-        //         print("completed")
-        //     } onDisposed: {
-        //         print("disposed")
-        //     }
-        //     .disposed(by: disposeBag)
-        // 
-        // // 2. 생략
-        // // Tap에서 Error가 발생하는 일, 이벤트가 끝나는 경우도 없기 때문에 해당 코드를 생략
-        // button.rx.tap
-        //     .subscribe { _ in
-        //         // 버튼을 클릭했을 때
-        //         self.label.text = "버튼을 클릭했어요"
-        //         print("next")
-        //     } onDisposed: {
-        //         print("disposed")
-        //     }
-        //     .disposed(by: disposeBag)
-        // 
-        // // 3. leak
-        // button.rx.tap
-        //     .subscribe { [weak self] _ in
-        //         // 버튼을 클릭했을 때
-        //         self?.label.text = "버튼을 클릭했어요"
-        //         print("next")
-        //     } onDisposed: {
-        //         print("disposed")
-        //     }
-        //     .disposed(by: disposeBag)
-        // 
-        // // 4.
-        // button.rx.tap
-        //     .withUnretained(self)   // weak self
-        //     .subscribe { _ in
-        //         // 버튼을 클릭했을 때
-        //         self.label.text = "버튼을 클릭했어요"
-        //         print("next")
-        //     } onDisposed: {
-        //         print("disposed")
-        //     }
-        //     .disposed(by: disposeBag)
-        // 
-        // 
-        // // 5.
-        // // .withUnretained(self)를 반복적으로 작성하는 걸 줄이기 위해 .subscribe(with: ~
-        // // subscribe: 스레드가 보장이 되지 않음. 즉 background에서도 동작이 계속될 수 있다.
-        // // -> 네트워크 통신이 섞이거나 스레드가 섞이면 보라색 오류가 발생할 수 있음
-        // // -> DispatchQueue.main 으로 감싸주어야 함
-        // button.rx.tap
-        //     .subscribe(with: self, onNext: { owner, _ in
-        //         DispatchQueue.main.async {
-        //             owner.label.text = "버튼을 클릭했어요"
-        //         }
-        //     }, onDisposed: { _ in
-        //         print("disposed")
-        //     })
-        //     .disposed(by: disposeBag)
-        // 
-        // 
-        // 
-        // // 6번부터는 UIKit으로 인해 달라지는 것들
-        // // case 6
-        // 
-        // 
-        // 
-        // 
-        // 
-        // 
-        // // 7.
-        // button.rx.tap
-        //     .observe(on: MainScheduler.instance)    // -> 이후에 진행하는 코드는 Main 스레드로 할게! 라는 뜻
-        //     .subscribe(with: self, onNext: { owner, _ in
-        //         owner.label.text = "버튼을 클릭했어요"
-        //     }, onDisposed: { _ in
-        //         print("disposed")
-        //     })
-        //     .disposed(by: disposeBag)
-        // 
-        // 
-        // // 8.
-        // // 메인 스레드로 동작시켜주는 친구는 왜 래핑을 안 해주지? + 탭은 에러가 발생하지 않으니까 애초에 error를 안 받는 친구는 없나?
-        // // -> bind
-        // button.rx.tap
-        //     .bind(with: self, onNext: { owner, _ in
-        //         owner.label.text = "버튼을 클릭했어요"
-        //     })
-        //     .disposed(by: disposeBag)
-        // 
+        // Infinite Observable
+        // 1.
+        button.rx.tap
+            .subscribe { _ in
+                // 버튼을 클릭했을 때
+                self.label.text = "버튼을 클릭했어요"
+                print("next")
+            } onError: { error in
+                print("error")
+            } onCompleted: {
+                print("completed")
+            } onDisposed: {
+                print("disposed")
+            }
+            .disposed(by: disposeBag)
+        
+        // 2. 생략
+        // Tap에서 Error가 발생하는 일, 이벤트가 끝나는 경우도 없기 때문에 해당 코드를 생략
+        button.rx.tap
+            .subscribe { _ in
+                // 버튼을 클릭했을 때
+                self.label.text = "버튼을 클릭했어요"
+                print("next")
+            } onDisposed: {
+                print("disposed")
+            }
+            .disposed(by: disposeBag)
+        
+        // 3. leak
+        button.rx.tap
+            .subscribe { [weak self] _ in
+                // 버튼을 클릭했을 때
+                self?.label.text = "버튼을 클릭했어요"
+                print("next")
+            } onDisposed: {
+                print("disposed")
+            }
+            .disposed(by: disposeBag)
+        
+        // 4.
+        button.rx.tap
+            .withUnretained(self)   // weak self
+            .subscribe { _ in
+                // 버튼을 클릭했을 때
+                self.label.text = "버튼을 클릭했어요"
+                print("next")
+            } onDisposed: {
+                print("disposed")
+            }
+            .disposed(by: disposeBag)
+        
+        
+        // 5.
+        // .withUnretained(self)를 반복적으로 작성하는 걸 줄이기 위해 .subscribe(with: ~) 사용
+        button.rx.tap
+            .subscribe(with: self, onNext: { owner, _ in
+                owner.label.text = "버튼을 클릭했어요"
+            }, onDisposed: { _ in
+                print("disposed")
+            })
+            .disposed(by: disposeBag)
+        
+        
+        
+        // 6번부터는 UIKit으로 인해 달라지는 것들
+        // case 6
+        // subscribe: 스레드가 보장이 되지 않음. 즉 background에서도 동작이 계속될 수 있다.
+        // -> 네트워크 통신이 섞이거나 스레드가 섞이면 보라색 오류가 발생할 수 있음
+        // -> DispatchQueue.main 으로 감싸주어야 함
+        button.rx.tap
+            .subscribe(with: self, onNext: { owner, _ in
+                DispatchQueue.main.async {
+                    owner.label.text = "버튼을 클릭했어요"
+                }
+            }, onDisposed: { _ in
+                print("disposed")
+            })
+            .disposed(by: disposeBag)
+        
+        
+        
+        // 7.
+        button.rx.tap
+            .observe(on: MainScheduler.instance)    // -> 이후에 진행하는 코드는 Main 스레드로 할게! 라는 뜻
+            .subscribe(with: self, onNext: { owner, _ in
+                owner.label.text = "버튼을 클릭했어요"
+            }, onDisposed: { _ in
+                print("disposed")
+            })
+            .disposed(by: disposeBag)
+        
+        
+        // 8.
+        // 메인 스레드로 동작시켜주는 친구는 왜 래핑을 안 해주지? + 탭은 에러가 발생하지 않으니까 애초에 error를 안 받는 친구는 없나?
+        // -> bind
+        button.rx.tap
+            .bind(with: self, onNext: { owner, _ in
+                owner.label.text = "버튼을 클릭했어요"
+            })
+            .disposed(by: disposeBag)
+        
         
         // ========= 여기까지만 이해해도 충분!
         
